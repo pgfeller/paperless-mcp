@@ -1,0 +1,35 @@
+# paperless-mcp — docker-compose.yml
+#
+# Usage:
+#   1. Create a ./config/config.toml (see README for format).
+#   2. docker compose up -d
+#
+# The MCP endpoint will be available at http://localhost:8000/mcp.
+
+services:
+  paperless-mcp:
+    image: ghcr.io/pgfeller/paperless-mcp:latest
+    # Alternatively, build from source:
+    # build: .
+    container_name: paperless-mcp
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the directory containing config.toml.
+      # Create ./config/config.toml before starting (see README).
+      - ./config:/config:ro
+    environment:
+      # Override config path if needed (default: /config/config.toml)
+      PAPERLESS_MCP_CONFIG: /config/config.toml
+    healthcheck:
+      # Verify the MCP server TCP socket is accepting connections.
+      test:
+        - "CMD"
+        - "python"
+        - "-c"
+        - "import socket; s=socket.create_connection(('localhost', 8000), timeout=5); s.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s

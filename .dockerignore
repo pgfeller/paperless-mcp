@@ -1,2 +1,30 @@
-node_modules
-build 
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Node (legacy)
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Editor / OS
+.vscode/
+.cursor/
+.DS_Store
+Thumbs.db
+
+# Tests / CI
+.github/
+*.log
+
+# Docker-compose config directory (runtime secret — never bake in)
+config/

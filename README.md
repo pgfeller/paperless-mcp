@@ -61,6 +61,63 @@ uv run paperless-mcp
 
 The MCP endpoint is available at `http://localhost:8000/mcp` (streamable HTTP).
 
+## Docker
+
+### Quick start
+
+```bash
+# Pull and run (replace values in the environment or mount a config file)
+docker run -d \
+  --name paperless-mcp \
+  -p 8000:8000 \
+  -v ./config:/config:ro \
+  ghcr.io/pgfeller/paperless-mcp:latest
+```
+
+Create `./config/config.toml` before starting (see [Configuration](#configuration) above).
+
+### docker-compose
+
+```bash
+# 1. Create the config directory and file
+mkdir config
+cat > config/config.toml <<'EOF'
+[paperless]
+server_url = "http://your-paperless-server:8000"
+token = "your-api-token"
+inbox_tag_id = 1
+EOF
+
+# 2. Start the service
+docker compose up -d
+
+# 3. Check it is healthy
+docker compose ps
+```
+
+The `docker-compose.yml` in this repository mounts `./config` as read-only and
+includes a health check that verifies the server is accepting TCP connections on
+port 8000.
+
+### Building locally
+
+```bash
+docker build -t paperless-mcp .
+docker run -d -p 8000:8000 -v ./config:/config:ro paperless-mcp
+```
+
+### Published image
+
+Pre-built images for `linux/amd64` and `linux/arm64` are available at:
+
+```
+ghcr.io/pgfeller/paperless-mcp:latest
+```
+
+Tags follow [Semantic Versioning](https://semver.org/) — `v1.2.3`, `1.2`, `latest`.
+
+---
+
 ## Getting an API token
 
 In Paperless-ngx, go to **Settings → Profile** and generate an API token, or use:
