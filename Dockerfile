@@ -15,8 +15,9 @@ FROM base AS builder
 
 WORKDIR /app
 
-# Copy only the dependency manifest and lockfile first for layer caching.
-COPY pyproject.toml uv.lock ./
+# Copy the dependency manifest, lockfile, and source so uv generates the
+# editable install finder with a populated MAPPING (not an empty dict).
+COPY pyproject.toml uv.lock main.py ./
 
 # Install production dependencies into the project virtual environment.
 # --frozen ensures the lockfile is used as-is without updates.
