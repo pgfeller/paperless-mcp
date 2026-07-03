@@ -1,3 +1,12 @@
+Metadata-Version: 2.4
+Name: paperless-mcp
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.28.1
+
 # paperless-mcp
 
 MCP server for [Paperless-ngx](https://docs.paperless-ngx.com/) using the **streamable HTTP** transport protocol.
@@ -127,30 +136,3 @@ curl -X POST http://your-server/api/token/ \
   -d '{"username": "your-user", "password": "your-password"}' \
   -H "Content-Type: application/json"
 ```
-
-## Connecting from Open WebUI
-
-To use this MCP server with Open WebUI:
-
-1. Open **Settings** → **Functions**
-2. Click **"+"** to add a new function
-3. Configure the MCP connection:
-   - **Name**: Paperless Assistant (or your preferred name)
-   - **Type**: MCP
-   - **URL**: `http://host.docker.internal:8000/mcp`
-     - If Open WebUI runs in Docker on the same host as paperless-mcp, use `host.docker.internal`
-     - If running on different hosts, replace with the actual hostname/IP
-     - **Critical**: The port (`:8000`) and `/mcp` path are required
-   - **Auth**: **None** ⚠️
-     - Do NOT use "Bearer" — the server authenticates to Paperless internally using credentials from `config.toml`
-     - Open WebUI does not need to provide additional auth tokens
-   - **Description**: (Optional) "Access Paperless-ngx documents"
-
-4. Click **Save**
-5. Test the connection by asking: "Show me documents in my inbox"
-
-### Common Issues
-
-- **404 errors**: Verify the URL includes `/mcp` at the end
-- **Connection refused**: Ensure the port `:8000` is included and the server is running (`uv run paperless-mcp`)
-- **Authentication errors**: Confirm **Auth** is set to **"None"**, not "Bearer"

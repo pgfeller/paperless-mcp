@@ -1,0 +1,9 @@
+README.md
+main.py
+pyproject.toml
+paperless_mcp.egg-info/PKG-INFO
+paperless_mcp.egg-info/SOURCES.txt
+paperless_mcp.egg-info/dependency_links.txt
+paperless_mcp.egg-info/entry_points.txt
+paperless_mcp.egg-info/requires.txt
+paperless_mcp.egg-info/top_level.txt

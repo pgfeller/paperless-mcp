@@ -11,3 +11,6 @@ dependencies = [
 
 [project.scripts]
 paperless-mcp = "main:main"
+
+[tool.uv]
+package = true
