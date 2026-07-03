@@ -1,0 +1,23 @@
+{
+  "name": "paperless-mcp",
+  "version": "1.0.2",
+  "description": "MCP server for Paperless-ngx",
+  "homepage": "https://github.com/pgfeller/paperless-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/pgfeller/paperless-mcp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgfeller/paperless-mcp.git"
+  },
+  "license": "ISC",
+  "author": "Patrik Gfeller",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
